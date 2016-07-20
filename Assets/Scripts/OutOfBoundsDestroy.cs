@@ -10,7 +10,7 @@ public class OutOfBoundsDestroy : MonoBehaviour {
         trans = GetComponent<Transform>();
     }
 	
-	// Update is called once per frame
+	// Check if out of bounds vertically
 	void Update () {
 	    if(trans.position.y < - 10)
             this.gameObject.SetActive(false);

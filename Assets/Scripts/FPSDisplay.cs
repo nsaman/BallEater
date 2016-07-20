@@ -24,6 +24,7 @@ public class FPSDisplay : MonoBehaviour
         float msec = deltaTime * 1000.0f;
         float fps = 1.0f / deltaTime;
         GameObject[] balls = GameObject.FindGameObjectsWithTag("Edible");
+        // find the biggest enemy ball
         float biggestBall = 0;
         foreach(GameObject ball in balls)
         {

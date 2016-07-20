@@ -33,11 +33,7 @@ public class BaseAI : MonoBehaviour {
             //todo add jump logic
 
             rb.AddForce(toFoodDirection * speed * Time.deltaTime * (rb.mass + 1) / 1.08f);
-        } else
-        {
-            // currentTarget = findClosestFood();
-        }
-
+        } 
     }
 
 

@@ -5,7 +5,6 @@ public class CameraController : MonoBehaviour
 {
 
     public GameObject ball;
-
     private Vector3 offset;
 
     void Start()

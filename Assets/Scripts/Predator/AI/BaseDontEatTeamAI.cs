@@ -34,11 +34,6 @@ public class BaseDontEatTeamAI : MonoBehaviour {
 
             rb.AddForce(toFoodDirection * speed * Time.deltaTime * (rb.mass + 1) / 1.08f);
         }
-        else
-        {
-            // currentTarget = findClosestFood();
-        }
-
     }
 
 
@@ -64,6 +59,9 @@ public class BaseDontEatTeamAI : MonoBehaviour {
         }
 
         foods.AddRange(edibles);
+
+        // get rid of self
+        foods.Remove(gameObject);
 
         // then find the closest that we can eat
         foreach (GameObject food in foods)

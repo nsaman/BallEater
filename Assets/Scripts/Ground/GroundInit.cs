@@ -4,7 +4,7 @@ using System.Collections;
 public class GroundInit : MonoBehaviour {
 
     private Transform trans;
-    public Globals globals;
+    private Globals globals;
 
     void Start()
     {

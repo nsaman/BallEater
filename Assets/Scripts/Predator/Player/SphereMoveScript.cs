@@ -23,6 +23,7 @@ public class SphereMoveScript : MonoBehaviour {
             inputDirection = inputDirection.normalized;
         }
         
+        // set movement direction based on camera
         Vector3 newRight = Vector3.Cross(Vector3.up, cam.forward);
         Vector3 newForward = Vector3.Cross(newRight, Vector3.up);
         Vector3 movement = (newRight * inputDirection.x) + (newForward * inputDirection.y);
@@ -34,7 +35,6 @@ public class SphereMoveScript : MonoBehaviour {
         }
 
         rb.AddForce (movement * speed * Time.deltaTime * (rb.mass + 1)/1.08f);
-
     }
 
 
@@ -42,5 +42,4 @@ public class SphereMoveScript : MonoBehaviour {
     {
         canJump = true;
     }
-
 }

@@ -7,6 +7,7 @@ public class TeamPointer : MonoBehaviour {
     public TeamController TeamController
     {
         get{ return teamController; }
+        // on setting team, change this gameObjects color to reflect the teams
         set
         {
             teamController = value;

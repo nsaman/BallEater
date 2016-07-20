@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 //using System.Collections;
 
+// singleton class that will load the config and be read by others
 public class Globals {
 
     public int GROUNDXSIZE = 100;
@@ -52,7 +53,7 @@ public class Globals {
         GROUNDZSIZE = (int)token.SelectToken("GROUNDZSIZE");
         MAXFOOD = (int)token.SelectToken("MAXFOOD");*/
 
-
+        // this is reading json files the hard way
         string stringGROUNDXSIZE = json.Substring(json.IndexOf("XSize") + 8);
         string stringGROUNDZSIZE = json.Substring(json.IndexOf("ZSize") + 8);
         string stringMAXFOOD = json.Substring(json.IndexOf("MAXFOOD") + 10);

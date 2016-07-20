@@ -5,18 +5,20 @@ using System.Collections.Generic;
 public class EnemySpawnerController : MonoBehaviour {
 
     public GameObject NPC;
-    public Globals globals;
+    private Globals globals;
     private int enemiesSpawned;
     private List<TeamController> teams;
 
     // Use this for initialization
     void Start()
     {
-        teams = new List<TeamController>();
-        teams.Add(new TeamController());
-        GameObject.Find("Player").GetComponent<TeamPointer>().TeamController = teams[0];
         globals = Globals.Instance;
         enemiesSpawned = 0;
+        teams = new List<TeamController>();
+
+        // add a team for the player
+        teams.Add(new TeamController());
+        GameObject.Find("Player").GetComponent<TeamPointer>().TeamController = teams[0];
     }
 
     // Update is called once per frame
@@ -24,11 +26,16 @@ public class EnemySpawnerController : MonoBehaviour {
     {
        if (enemiesSpawned < globals.MAXENEMIES)
         {
+            // spawn a npc in the playing area
             GameObject npc = (GameObject)Instantiate(NPC, new Vector3((Random.value * globals.GROUNDXSIZE - globals.GROUNDXSIZE / 2), Random.value * 20 + 25, (Random.value * globals.GROUNDZSIZE - globals.GROUNDZSIZE / 2) ), Quaternion.identity);
-            teams.Add(new TeamController());
             enemiesSpawned++;
-            if (enemiesSpawned < (globals.MAXTEAMS - 1))
+
+            // if we haven't reachead max teams (player needs to be accounted for)
+            if (enemiesSpawned < globals.MAXTEAMS)
+            {
+                teams.Add(new TeamController());
                 npc.GetComponent<TeamPointer>().TeamController = teams[enemiesSpawned];
+            }
             else
                 npc.GetComponent<TeamPointer>().TeamController = teams[enemiesSpawned % globals.MAXTEAMS];
 

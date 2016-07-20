@@ -13,8 +13,10 @@ public class CollisionSplash : MonoBehaviour {
             List<GameObject> edibles = new List<GameObject>(GameObject.FindGameObjectsWithTag("Edible"));
             
             foods.AddRange(edibles);
+            // remove this gameObject from the list 
             foods.Remove(gameObject);
 
+            // for each moveable gameobject apply force away from the impact
             foreach (GameObject food in foods)
             {
                 Vector3 force = food.GetComponent<Transform>().position - GetComponent<Transform>().position;
