@@ -19,8 +19,8 @@ public class CollisionSplash : MonoBehaviour {
             // for each moveable gameobject apply force away from the impact
             foreach (GameObject food in foods)
             {
-                Vector3 force = food.GetComponent<Transform>().position - GetComponent<Transform>().position;
-                food.GetComponent<Rigidbody>().AddForce(force.normalized / Mathf.Pow(force.magnitude, 2) * Mathf.Sqrt(collision.relativeVelocity.magnitude));     
+                Vector3 forceDirection = food.GetComponent<Transform>().position - collision.contacts[0].point;  // GetComponent<Transform>().position;
+                food.GetComponent<Rigidbody>().AddForce(forceDirection.normalized / Mathf.Pow(forceDirection.magnitude, 2) * Mathf.Sqrt(collision.impulse.magnitude)/2);
             }
         }
     }
