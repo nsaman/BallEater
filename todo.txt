@@ -1,0 +1,28 @@
+implement:
+finish todo 
+MAXTEAMS
+hybrid camera
+Blast radius on hitting ground/other stuff
+AI falling off edge
+splitting
+Shrinking map game mode
+Endless Scrolling
+Special movements and attacks
+Better configs/reading
+Non-square shaped food
+Generated/default base terrain
+Non-food objects
+Collecting game mode
+Menu
+Weapons
+Better/cheaper AI
+Biomes
+Build-able structures
+Speed boosts/launchers on ground
+Mining
+Prettier game (this one sucks ass)
+Multiplayer
+Walls on the edge of the map (?)
+
+Questionable upcoming features:
+
