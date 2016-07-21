@@ -52,7 +52,7 @@ public class BaseDontEatTeamAI : MonoBehaviour {
         List<GameObject> edibles = new List<GameObject>(GameObject.FindGameObjectsWithTag("Edible"));
 
         // friends aren't food!
-        for(int i = edibles.Count - 1; i > 0; i--)
+        for(int i = edibles.Count - 1; i >= 0; i--)
         {
             if (edibles[i].GetComponent<TeamPointer>().TeamController == GetComponent<TeamPointer>().TeamController)
                 edibles.RemoveAt(i);
