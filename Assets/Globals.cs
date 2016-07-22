@@ -9,6 +9,8 @@ public class Globals {
     public int MAXFOOD = 1500;
     public int MAXENEMIES = 250;
     public int MAXTEAMS = 20;
+    public bool HASEDGEWALLS = false;
+    public int WALLHEIGHT = 1;
 
     private static Globals instance;
 
@@ -39,7 +41,9 @@ public class Globals {
                            "\t\"GroundZSize\": "+ GROUNDZSIZE + ",\n" +
                            "\t\"MAXFOOD\": " + MAXFOOD + ",\n" +
                            "\t\"MAXENEMIES\": " + MAXENEMIES + ",\n" +
-                           "\t\"MAXTEAMS\": " + MAXTEAMS + "\n" +
+                           "\t\"MAXTEAMS\": " + MAXTEAMS + ",\n" +
+                           "\t\"HASEDGEWALLS\": " + HASEDGEWALLS + ",\n" +
+                           "\t\"WALLHEIGHT\": " + WALLHEIGHT + "\n" +
                            "}";
             System.IO.File.WriteAllText("conf.json", text);
         }
@@ -59,13 +63,17 @@ public class Globals {
         string stringMAXFOOD = json.Substring(json.IndexOf("MAXFOOD") + 10);
         string stringMAXENEMIES = json.Substring(json.IndexOf("MAXENEMIES") + 13);
         string stringMAXTEAMS = json.Substring(json.IndexOf("MAXTEAMS") + 11);
+        string stringHASEDGEWALLS = json.Substring(json.IndexOf("HASEDGEWALLS") + 15);
+        string stringWALLHEIGHT = json.Substring(json.IndexOf("WALLHEIGHT") + 13);
 
 
         GROUNDXSIZE = int.Parse(stringGROUNDXSIZE.Substring(0, stringGROUNDXSIZE.IndexOf(",")));
         GROUNDZSIZE = int.Parse(stringGROUNDZSIZE.Substring(0, stringGROUNDZSIZE.IndexOf(",")));
         MAXFOOD = int.Parse(stringMAXFOOD.Substring(0, stringMAXFOOD.IndexOf(",")));
         MAXENEMIES = int.Parse(stringMAXENEMIES.Substring(0, stringMAXENEMIES.IndexOf(",")));
-        MAXTEAMS = int.Parse(stringMAXTEAMS.Substring(0, stringMAXTEAMS.IndexOf("\n")));
+        MAXTEAMS = int.Parse(stringMAXTEAMS.Substring(0, stringMAXTEAMS.IndexOf(",")));
+        HASEDGEWALLS = bool.Parse(stringHASEDGEWALLS.Substring(0, stringHASEDGEWALLS.IndexOf(",")));
+        WALLHEIGHT = int.Parse(stringWALLHEIGHT.Substring(0, stringWALLHEIGHT.IndexOf("\n")));
     }
 
 
