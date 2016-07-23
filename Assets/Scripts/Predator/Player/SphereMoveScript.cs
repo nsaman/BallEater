@@ -47,6 +47,12 @@ public class SphereMoveScript : MonoBehaviour {
             GetComponent<Split>().DoPlayerSplit();
             timeSinceLastSplit = 0;
         }
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            GetComponent<Blast>().blast_test();
+            print("X_TEST");
+        }
     }
 
 
