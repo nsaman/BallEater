@@ -36,12 +36,17 @@ public class Split : MonoBehaviour {
         {
             rb.mass = rb.mass / 2;
 
-            GameObject npc = (GameObject)Instantiate(NPC, tf.position + spawnDirection * tf.localScale.x / 2, Quaternion.identity);
+            //make sure we don't spawn the guy under the ground
+            Vector3 spawnLocation = tf.position + spawnDirection * (Mathf.Pow((3f * rb.mass / 4 / Mathf.PI), 1f / 3f)) * 3f;
+            if (spawnLocation.y < 0)
+                spawnLocation.y = 0;
+
+            GameObject npc = (GameObject)Instantiate(NPC, spawnLocation, Quaternion.identity);
             npc.GetComponent<TeamPointer>().TeamController = tp.TeamController;
             npc.GetComponent<Rigidbody>().mass = rb.mass;
 
             // add this force plus launch force of split
-            npc.GetComponent<Rigidbody>().AddForce(rb.velocity + spawnDirection * 700f * rb.mass);
+            npc.GetComponent<Rigidbody>().AddForce(rb.velocity + spawnDirection * globals.SPLITSPEED * rb.mass);
         }
     }
 }

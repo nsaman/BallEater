@@ -13,6 +13,7 @@ public class AISplitting : MonoBehaviour
     private Globals globals;
     // only split if we get a new target
     private bool newSplitTarget;
+    public float timeSinceLastSplit;
 
     void Start()
     {
@@ -22,6 +23,7 @@ public class AISplitting : MonoBehaviour
         splitTarget = null;
         globals = Globals.Instance;
         newSplitTarget = false;
+        timeSinceLastSplit = 0;
     }
 
     // Update is called once per frame
@@ -43,9 +45,13 @@ public class AISplitting : MonoBehaviour
 
             rb.AddForce(toFoodDirection * speed * Time.deltaTime * (rb.mass + 1) / 1.08f);
         }
-        if (newSplitTarget && splitTarget != null)
+        timeSinceLastSplit += Time.deltaTime;
+        if (globals.AICANSPLIT && newSplitTarget && splitTarget != null && timeSinceLastSplit >= globals.MINTIMESPLIT)
         {
             GetComponent<Split>().DoSplit(splitTarget.transform.position - GetComponent<Transform>().position);
+            if (globals.AISPLITONCEPERTARGET)
+                newSplitTarget = false;
+            timeSinceLastSplit = 0;
         }
     }
 
@@ -101,7 +107,6 @@ public class AISplitting : MonoBehaviour
                     closestSplitTarget = edible;
                     closestSplitTargetDistance = currentFoodDistance;
                 }
-
             }
         }
 

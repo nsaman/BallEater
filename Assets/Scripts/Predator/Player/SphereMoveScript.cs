@@ -8,6 +8,7 @@ public class SphereMoveScript : MonoBehaviour {
     private Transform cam;
     private bool canJump;
     private Globals globals;
+    public float timeSinceLastSplit;
 
     void Start()
     {
@@ -15,6 +16,7 @@ public class SphereMoveScript : MonoBehaviour {
         canJump = true;
         cam = Camera.main.transform;
         globals = Globals.Instance;
+        timeSinceLastSplit = globals.MINTIMESPLIT;
     }
 	
 	// Update is called once per frame
@@ -39,9 +41,11 @@ public class SphereMoveScript : MonoBehaviour {
 
         rb.AddForce (movement * speed * Time.deltaTime * (rb.mass + 1)/1.08f);
 
-        if (globals.CANSPLIT && Input.GetKeyDown(KeyCode.LeftShift))
+        timeSinceLastSplit += Time.deltaTime;
+        if (globals.CANSPLIT && Input.GetKeyDown(KeyCode.LeftShift) && timeSinceLastSplit >= globals.MINTIMESPLIT)
         {
             GetComponent<Split>().DoPlayerSplit();
+            timeSinceLastSplit = 0;
         }
     }
 
