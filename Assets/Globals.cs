@@ -11,8 +11,6 @@ public class Globals {
     public int MAXTEAMS = 20;
     public bool HASEDGEWALLS = false;
     public int WALLHEIGHT = 1;
-    public bool CANSPLIT = true;
-    public float MINSPLITMASS = .9f;
 
     private static Globals instance;
 
@@ -45,9 +43,7 @@ public class Globals {
                            "\t\"MAXENEMIES\": " + MAXENEMIES + ",\n" +
                            "\t\"MAXTEAMS\": " + MAXTEAMS + ",\n" +
                            "\t\"HASEDGEWALLS\": " + HASEDGEWALLS + ",\n" +
-                           "\t\"WALLHEIGHT\": " + WALLHEIGHT + ",\n" +
-                           "\t\"CANSPLIT\": " + CANSPLIT + ",\n" +
-                           "\t\"MINSPLITMASS\": " + MINSPLITMASS + "\n" +
+                           "\t\"WALLHEIGHT\": " + WALLHEIGHT + "\n" +
                            "}";
             System.IO.File.WriteAllText("conf.json", text);
         }
@@ -69,8 +65,6 @@ public class Globals {
         string stringMAXTEAMS = json.Substring(json.IndexOf("MAXTEAMS") + 11);
         string stringHASEDGEWALLS = json.Substring(json.IndexOf("HASEDGEWALLS") + 15);
         string stringWALLHEIGHT = json.Substring(json.IndexOf("WALLHEIGHT") + 13);
-        string stringCANSPLIT = json.Substring(json.IndexOf("CANSPLIT") + 11);
-        string stringMINSPLITMASS = json.Substring(json.IndexOf("MINSPLITMASS") + 15);
 
 
         GROUNDXSIZE = int.Parse(stringGROUNDXSIZE.Substring(0, stringGROUNDXSIZE.IndexOf(",")));
@@ -79,9 +73,7 @@ public class Globals {
         MAXENEMIES = int.Parse(stringMAXENEMIES.Substring(0, stringMAXENEMIES.IndexOf(",")));
         MAXTEAMS = int.Parse(stringMAXTEAMS.Substring(0, stringMAXTEAMS.IndexOf(",")));
         HASEDGEWALLS = bool.Parse(stringHASEDGEWALLS.Substring(0, stringHASEDGEWALLS.IndexOf(",")));
-        WALLHEIGHT = int.Parse(stringWALLHEIGHT.Substring(0, stringWALLHEIGHT.IndexOf(",")));
-        CANSPLIT = bool.Parse(stringCANSPLIT.Substring(0, stringCANSPLIT.IndexOf(",")));
-        MINSPLITMASS = float.Parse(stringMINSPLITMASS.Substring(0, stringMINSPLITMASS.IndexOf("\n")));
+        WALLHEIGHT = int.Parse(stringWALLHEIGHT.Substring(0, stringWALLHEIGHT.IndexOf("\n")));
     }
 
 

@@ -14,8 +14,6 @@ public class FoodSpawner : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-        if (globals.MAXFOOD < 1)
-            return;
         // if we can spawn more food, do so. Note: food size is set in FoodInit
         if (GameObject.FindGameObjectsWithTag("Food").Length < globals.MAXFOOD)
             Instantiate(food, new Vector3(Random.value * globals.GROUNDXSIZE - globals.GROUNDXSIZE/2, Random.value * 10 + 10, Random.value * globals.GROUNDZSIZE - globals.GROUNDZSIZE / 2), Quaternion.identity);

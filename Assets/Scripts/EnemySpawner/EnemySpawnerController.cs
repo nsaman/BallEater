@@ -24,8 +24,6 @@ public class EnemySpawnerController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (globals.MAXENEMIES < 1)
-            return;
        if (enemiesSpawned < globals.MAXENEMIES)
         {
             // spawn a npc in the playing area
