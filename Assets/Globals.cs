@@ -4,6 +4,7 @@
 // singleton class that will load the config and be read by others
 public class Globals {
 
+    // default settings
     public int GROUNDXSIZE = 100;
     public int GROUNDZSIZE = 100;
     public int MAXFOOD = 1500;
@@ -11,6 +12,12 @@ public class Globals {
     public int MAXTEAMS = 20;
     public bool HASEDGEWALLS = false;
     public int WALLHEIGHT = 1;
+    public bool CANSPLIT = true;
+    public bool AICANSPLIT = true;
+    public float SPLITSPEED = 700f;
+    public float MINSPLITMASS = .9f;
+    public float MINTIMESPLIT = .5f;
+    public bool AISPLITONCEPERTARGET = false;
 
     private static Globals instance;
 
@@ -43,7 +50,13 @@ public class Globals {
                            "\t\"MAXENEMIES\": " + MAXENEMIES + ",\n" +
                            "\t\"MAXTEAMS\": " + MAXTEAMS + ",\n" +
                            "\t\"HASEDGEWALLS\": " + HASEDGEWALLS + ",\n" +
-                           "\t\"WALLHEIGHT\": " + WALLHEIGHT + "\n" +
+                           "\t\"WALLHEIGHT\": " + WALLHEIGHT + ",\n" +
+                           "\t\"CANSPLIT\": " + CANSPLIT + ",\n" +
+                           "\t\"AICANSPLIT\": " + AICANSPLIT + ",\n" +
+                           "\t\"MINSPLITMASS\": " + MINSPLITMASS + ",\n" +
+                           "\t\"SPLITSPEED\": " + SPLITSPEED + ",\n" +
+                           "\t\"MINTIMESPLIT\": " + MINTIMESPLIT + ",\n" +
+                           "\t\"AISPLITONCEPERTARGET\": " + AISPLITONCEPERTARGET + "\n" +
                            "}";
             System.IO.File.WriteAllText("conf.json", text);
         }
@@ -65,6 +78,12 @@ public class Globals {
         string stringMAXTEAMS = json.Substring(json.IndexOf("MAXTEAMS") + 11);
         string stringHASEDGEWALLS = json.Substring(json.IndexOf("HASEDGEWALLS") + 15);
         string stringWALLHEIGHT = json.Substring(json.IndexOf("WALLHEIGHT") + 13);
+        string stringCANSPLIT = json.Substring(json.IndexOf("CANSPLIT") + 11);
+        string stringAICANSPLIT = json.Substring(json.IndexOf("AICANSPLIT") + 13);
+        string stringSPLITSPEED = json.Substring(json.IndexOf("SPLITSPEED") + 13);
+        string stringMINSPLITMASS = json.Substring(json.IndexOf("MINSPLITMASS") + 15);
+        string stringMINTIMESPLIT = json.Substring(json.IndexOf("MINTIMESPLIT") + 15);
+        string stringAISPLITONCEPERTARGET = json.Substring(json.IndexOf("AISPLITONCEPERTARGET") + 23);
 
 
         GROUNDXSIZE = int.Parse(stringGROUNDXSIZE.Substring(0, stringGROUNDXSIZE.IndexOf(",")));
@@ -73,7 +92,13 @@ public class Globals {
         MAXENEMIES = int.Parse(stringMAXENEMIES.Substring(0, stringMAXENEMIES.IndexOf(",")));
         MAXTEAMS = int.Parse(stringMAXTEAMS.Substring(0, stringMAXTEAMS.IndexOf(",")));
         HASEDGEWALLS = bool.Parse(stringHASEDGEWALLS.Substring(0, stringHASEDGEWALLS.IndexOf(",")));
-        WALLHEIGHT = int.Parse(stringWALLHEIGHT.Substring(0, stringWALLHEIGHT.IndexOf("\n")));
+        WALLHEIGHT = int.Parse(stringWALLHEIGHT.Substring(0, stringWALLHEIGHT.IndexOf(",")));
+        CANSPLIT = bool.Parse(stringCANSPLIT.Substring(0, stringCANSPLIT.IndexOf(",")));
+        AICANSPLIT = bool.Parse(stringAICANSPLIT.Substring(0, stringAICANSPLIT.IndexOf(",")));
+        SPLITSPEED = float.Parse(stringSPLITSPEED.Substring(0, stringSPLITSPEED.IndexOf(",")));
+        MINSPLITMASS = float.Parse(stringMINSPLITMASS.Substring(0, stringMINSPLITMASS.IndexOf(",")));
+        MINTIMESPLIT = float.Parse(stringMINTIMESPLIT.Substring(0, stringMINTIMESPLIT.IndexOf(",")));
+        AISPLITONCEPERTARGET = bool.Parse(stringAISPLITONCEPERTARGET.Substring(0, stringAISPLITONCEPERTARGET.IndexOf("\n")));
     }
 
 
