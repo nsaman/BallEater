@@ -13,7 +13,7 @@ public class AISplitting : MonoBehaviour
     private Globals globals;
     // only split if we get a new target
     private bool newSplitTarget;
-    public float timeSinceLastSplit;
+    private float timeSinceLastSplit;
 
     void Start()
     {

@@ -18,6 +18,7 @@ public class Globals {
     public float MINSPLITMASS = .9f;
     public float MINTIMESPLIT = .5f;
     public bool AISPLITONCEPERTARGET = false;
+    public bool CANSWITCHWITHTEAM = true;
 
     private static Globals instance;
 
@@ -56,7 +57,8 @@ public class Globals {
                            "\t\"MINSPLITMASS\": " + MINSPLITMASS + ",\n" +
                            "\t\"SPLITSPEED\": " + SPLITSPEED + ",\n" +
                            "\t\"MINTIMESPLIT\": " + MINTIMESPLIT + ",\n" +
-                           "\t\"AISPLITONCEPERTARGET\": " + AISPLITONCEPERTARGET + "\n" +
+                           "\t\"AISPLITONCEPERTARGET\": " + AISPLITONCEPERTARGET + ",\n" +
+                           "\t\"CANSWITCHWITHTEAM\": " + CANSWITCHWITHTEAM + "\n" +
                            "}";
             System.IO.File.WriteAllText("conf.json", text);
         }
@@ -84,6 +86,7 @@ public class Globals {
         string stringMINSPLITMASS = json.Substring(json.IndexOf("MINSPLITMASS") + 15);
         string stringMINTIMESPLIT = json.Substring(json.IndexOf("MINTIMESPLIT") + 15);
         string stringAISPLITONCEPERTARGET = json.Substring(json.IndexOf("AISPLITONCEPERTARGET") + 23);
+        string stringCANSWITCHWITHTEAM = json.Substring(json.IndexOf("CANSWITCHWITHTEAM") + 20);
 
 
         GROUNDXSIZE = int.Parse(stringGROUNDXSIZE.Substring(0, stringGROUNDXSIZE.IndexOf(",")));
@@ -98,7 +101,8 @@ public class Globals {
         SPLITSPEED = float.Parse(stringSPLITSPEED.Substring(0, stringSPLITSPEED.IndexOf(",")));
         MINSPLITMASS = float.Parse(stringMINSPLITMASS.Substring(0, stringMINSPLITMASS.IndexOf(",")));
         MINTIMESPLIT = float.Parse(stringMINTIMESPLIT.Substring(0, stringMINTIMESPLIT.IndexOf(",")));
-        AISPLITONCEPERTARGET = bool.Parse(stringAISPLITONCEPERTARGET.Substring(0, stringAISPLITONCEPERTARGET.IndexOf("\n")));
+        AISPLITONCEPERTARGET = bool.Parse(stringAISPLITONCEPERTARGET.Substring(0, stringAISPLITONCEPERTARGET.IndexOf(",")));
+        CANSWITCHWITHTEAM = bool.Parse(stringCANSWITCHWITHTEAM.Substring(0, stringCANSWITCHWITHTEAM.IndexOf("\n")));
     }
 
 

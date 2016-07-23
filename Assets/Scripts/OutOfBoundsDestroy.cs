@@ -12,8 +12,8 @@ public class OutOfBoundsDestroy : MonoBehaviour {
 	
 	// Check if out of bounds vertically
 	void Update () {
-	    if(trans.position.y < - 10)
-            this.gameObject.SetActive(false);
+        if (trans.position.y < -10)
+            Destroy(gameObject);
 
     }
 }

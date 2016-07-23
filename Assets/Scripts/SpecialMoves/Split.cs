@@ -6,12 +6,14 @@ public class Split : MonoBehaviour {
     private Transform tf;
     private Rigidbody rb;
     private Camera cam;
-    public GameObject NPC;
     private TeamPointer tp;
     private Globals globals;
+    GameObject ballPrefab;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start ()
+    {
+        ballPrefab = (GameObject)Resources.Load("Prefabs/Ball");
         tf = GetComponent<Transform>();
         rb = GetComponent<Rigidbody>();
         cam = Camera.main;
@@ -41,7 +43,7 @@ public class Split : MonoBehaviour {
             if (spawnLocation.y < 0)
                 spawnLocation.y = 0;
 
-            GameObject npc = (GameObject)Instantiate(NPC, spawnLocation, Quaternion.identity);
+            GameObject npc = (GameObject)Instantiate(ballPrefab, spawnLocation, Quaternion.identity);
             npc.GetComponent<TeamPointer>().TeamController = tp.TeamController;
             npc.GetComponent<Rigidbody>().mass = rb.mass;
 

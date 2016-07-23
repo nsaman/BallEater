@@ -23,6 +23,11 @@ public class EatController : MonoBehaviour {
             float newScale = currentScale + (expectedScale - currentScale) / 10;
             trans.localScale = new Vector3(newScale, newScale, newScale);
         }
+        if (currentScale / expectedScale > 1.01f)
+        {
+            float newScale = currentScale + (expectedScale - currentScale) / 10;
+            trans.localScale = new Vector3(newScale, newScale, newScale);
+        }
     }
 
     // when colliding with something, make sure we can eat it and it's not a teamate

@@ -34,7 +34,14 @@ public class FPSDisplay : MonoBehaviour
                     biggestBall = ball.GetComponent<Rigidbody>().mass;
             }
         }
-        string text = string.Format("{0:0.0} ms ({1:0.} fps)\nFood: " + GameObject.FindGameObjectsWithTag("Food").Length + "\n" + "Enimies: " + (balls.Length - 1) + "\nYour Mass: " + player.GetComponent<Rigidbody>().mass + "\nTop enemy mass: " + biggestBall, msec, fps);
+        string text = "";
+        if (player != null)
+        {
+            text = string.Format("{0:0.0} ms ({1:0.} fps)\nFood: " + GameObject.FindGameObjectsWithTag("Food").Length + "\n" + "Enimies: " + (balls.Length - 1) + "\nYour Mass: " + player.GetComponent<Rigidbody>().mass + "\nTop enemy mass: " + biggestBall, msec, fps);
+        } else
+        {
+            text = string.Format("{0:0.0} ms ({1:0.} fps)\nFood: " + GameObject.FindGameObjectsWithTag("Food").Length + "\n" + "Enimies: " + (balls.Length - 1) + "\nYour Mass: 0\nTop enemy mass: " + biggestBall, msec, fps);
+        }
         GUI.Label(rect, text, style);
     }
 }

@@ -39,11 +39,14 @@ namespace UnityStandardAssets.Cameras
 
         void Update()
         {
-            float ballRadius = Mathf.Pow((playerRb.mass * 1.5f) / (4 * Mathf.PI), 1f / 2f);
-            if (closestDistance < ballRadius && closestDistance / ballRadius < .99f)
-                closestDistance += (ballRadius - closestDistance)/22;
-            if (!(closestDistance - Input.GetAxis("Mouse ScrollWheel") * 4 < ballRadius))
-                closestDistance -= Input.GetAxis("Mouse ScrollWheel") * 4;
+            if (playerRb != null)
+            {
+                float ballRadius = Mathf.Pow((playerRb.mass * 1.5f) / (4 * Mathf.PI), 1f / 2f);
+                if (closestDistance < ballRadius && closestDistance / ballRadius < .99f)
+                    closestDistance += (ballRadius - closestDistance) / 22;
+                if (!(closestDistance - Input.GetAxis("Mouse ScrollWheel") * 4 < ballRadius))
+                    closestDistance -= Input.GetAxis("Mouse ScrollWheel") * 4;
+            }
         }
 
         private void LateUpdate()
