@@ -5,13 +5,16 @@ public class SphereMoveScript : MonoBehaviour {
 
     private Rigidbody rb;
     private static float speed = 100;
-    public Transform cam;
+    private Transform cam;
     private bool canJump;
+    private Globals globals;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         canJump = true;
+        cam = Camera.main.transform;
+        globals = Globals.Instance;
     }
 	
 	// Update is called once per frame
@@ -28,13 +31,18 @@ public class SphereMoveScript : MonoBehaviour {
         Vector3 newForward = Vector3.Cross(newRight, Vector3.up);
         Vector3 movement = (newRight * inputDirection.x) + (newForward * inputDirection.y);
         
-        if (Input.GetKey("space") && canJump == true)
+        if (Input.GetKey(KeyCode.Space) && canJump == true)
         {
             movement.y += (Mathf.Sqrt(rb.mass) + 70) / 1.5f;
             canJump = false;
         }
 
         rb.AddForce (movement * speed * Time.deltaTime * (rb.mass + 1)/1.08f);
+
+        if (globals.CANSPLIT && Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            GetComponent<Split>().DoPlayerSplit();
+        }
     }
 
 
