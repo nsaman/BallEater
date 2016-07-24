@@ -71,10 +71,10 @@ public class TakeOverAI : MonoBehaviour
 
                 // todo find a way to not have to keep changing the ai script (interface?)
                 
-                Destroy(currentTarget.GetComponent<AISplitting>());
+                Destroy(currentTarget.GetComponent<AILookWait>());
                 Destroy(GetComponent<SphereMoveScript>());
                 Destroy(GetComponent<TakeOverAI>());
-                gameObject.AddComponent<AISplitting>();
+                gameObject.AddComponent<AILookWait>();
                 currentTarget.AddComponent<SphereMoveScript>();
                 currentTarget.AddComponent<TakeOverAI>();
                 

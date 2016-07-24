@@ -2,13 +2,13 @@ implement:
 Blast radius on hitting ground/other stuff
 AI falling off edge
 invisible bottom
-Better/cheaper AI
 make all configs floats
 make speed a config
 uncouple fps and jumping
 prettier eating
 Shrinking map game mode
 Endless Scrolling
+Better/cheaper AI
 Special movements and attacks
 Better configs/reading
 Non-square shaped food

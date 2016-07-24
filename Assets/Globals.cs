@@ -19,6 +19,7 @@ public class Globals {
     public float MINTIMESPLIT = .5f;
     public bool AISPLITONCEPERTARGET = false;
     public bool CANSWITCHWITHTEAM = true;
+    public float AIMINLOOKWAIT = .5f;
 
     private static Globals instance;
 
@@ -58,7 +59,8 @@ public class Globals {
                            "\t\"SPLITSPEED\": " + SPLITSPEED + ",\n" +
                            "\t\"MINTIMESPLIT\": " + MINTIMESPLIT + ",\n" +
                            "\t\"AISPLITONCEPERTARGET\": " + AISPLITONCEPERTARGET + ",\n" +
-                           "\t\"CANSWITCHWITHTEAM\": " + CANSWITCHWITHTEAM + "\n" +
+                           "\t\"CANSWITCHWITHTEAM\": " + CANSWITCHWITHTEAM + ",\n" +
+                           "\t\"AIMINLOOKWAIT\": " + AIMINLOOKWAIT + "\n" +
                            "}";
             System.IO.File.WriteAllText("conf.json", text);
         }
@@ -87,6 +89,7 @@ public class Globals {
         string stringMINTIMESPLIT = json.Substring(json.IndexOf("MINTIMESPLIT") + 15);
         string stringAISPLITONCEPERTARGET = json.Substring(json.IndexOf("AISPLITONCEPERTARGET") + 23);
         string stringCANSWITCHWITHTEAM = json.Substring(json.IndexOf("CANSWITCHWITHTEAM") + 20);
+        string stringAIMINLOOKWAIT = json.Substring(json.IndexOf("AIMINLOOKWAIT") + 16);
 
 
         GROUNDXSIZE = int.Parse(stringGROUNDXSIZE.Substring(0, stringGROUNDXSIZE.IndexOf(",")));
@@ -102,7 +105,8 @@ public class Globals {
         MINSPLITMASS = float.Parse(stringMINSPLITMASS.Substring(0, stringMINSPLITMASS.IndexOf(",")));
         MINTIMESPLIT = float.Parse(stringMINTIMESPLIT.Substring(0, stringMINTIMESPLIT.IndexOf(",")));
         AISPLITONCEPERTARGET = bool.Parse(stringAISPLITONCEPERTARGET.Substring(0, stringAISPLITONCEPERTARGET.IndexOf(",")));
-        CANSWITCHWITHTEAM = bool.Parse(stringCANSWITCHWITHTEAM.Substring(0, stringCANSWITCHWITHTEAM.IndexOf("\n")));
+        CANSWITCHWITHTEAM = bool.Parse(stringCANSWITCHWITHTEAM.Substring(0, stringCANSWITCHWITHTEAM.IndexOf(",")));
+        AIMINLOOKWAIT = float.Parse(stringAIMINLOOKWAIT.Substring(0, stringAIMINLOOKWAIT.IndexOf("\n")));
     }
 
 
