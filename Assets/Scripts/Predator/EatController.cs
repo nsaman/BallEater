@@ -42,7 +42,7 @@ public class EatController : MonoBehaviour {
             if (rb.mass > otherRB.mass)
             {
                 rb.mass += otherRB.mass;
-                collision.collider.gameObject.SetActive(false);
+                Destroy(collision.collider.gameObject);
             }
         }
     }
