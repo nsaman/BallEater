@@ -25,6 +25,7 @@ public class Globals {
     public float SHRINKTIMETILLEND = 120;
     public float SHRINKXENDSIZE = 20;
     public float SHRINKZENDSIZE = 20;
+    public float NEARCLIPPLANE = .3f;
 
     private static Globals instance;
 
@@ -70,7 +71,8 @@ public class Globals {
                            "\t\"ISSHRINKING\": " + ISSHRINKING + ",\n" +
                            "\t\"SHRINKTIMETILLEND\": " + SHRINKTIMETILLEND + ",\n" +
                            "\t\"SHRINKXENDSIZE\": " + SHRINKXENDSIZE + ",\n" +
-                           "\t\"SHRINKZENDSIZE\": " + SHRINKZENDSIZE + "\n" +
+                           "\t\"SHRINKZENDSIZE\": " + SHRINKZENDSIZE + ",\n" +
+                           "\t\"NEARCLIPPLANE\": " + NEARCLIPPLANE + "\n" +
                            "}";
             System.IO.File.WriteAllText("conf.json", text);
         }
@@ -105,6 +107,7 @@ public class Globals {
         string stringSHRINKTIMETILLEND = json.Substring(json.IndexOf("SHRINKTIMETILLEND") + 20);
         string stringSHRINKXENDSIZE = json.Substring(json.IndexOf("SHRINKXENDSIZE") + 17);
         string stringSHRINKZENDSIZE = json.Substring(json.IndexOf("SHRINKZENDSIZE") + 17);
+        string stringNEARCLIPPLANE = json.Substring(json.IndexOf("NEARCLIPPLANE") + 16);
 
 
         GROUNDXSIZE = float.Parse(stringGROUNDXSIZE.Substring(0, stringGROUNDXSIZE.IndexOf(",")));
@@ -126,7 +129,8 @@ public class Globals {
         ISSHRINKING = bool.Parse(stringISSHRINKING.Substring(0, stringISSHRINKING.IndexOf(",")));
         SHRINKTIMETILLEND = float.Parse(stringSHRINKTIMETILLEND.Substring(0, stringSHRINKTIMETILLEND.IndexOf(",")));
         SHRINKXENDSIZE = float.Parse(stringSHRINKXENDSIZE.Substring(0, stringSHRINKXENDSIZE.IndexOf(",")));
-        SHRINKZENDSIZE = float.Parse(stringSHRINKZENDSIZE.Substring(0, stringSHRINKZENDSIZE.IndexOf("\n")));
+        SHRINKZENDSIZE = float.Parse(stringSHRINKZENDSIZE.Substring(0, stringSHRINKZENDSIZE.IndexOf(",")));
+        NEARCLIPPLANE = float.Parse(stringNEARCLIPPLANE.Substring(0, stringNEARCLIPPLANE.IndexOf("\n")));
     }
 
 
