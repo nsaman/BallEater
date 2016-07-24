@@ -33,7 +33,7 @@ public class EatController : MonoBehaviour {
     // when colliding with something, make sure we can eat it and it's not a teamate
     void OnCollisionEnter(Collision collision)
     {
-        if ((collision.collider.gameObject.CompareTag("Edible") && collision.collider.GetComponent<TeamPointer>().TeamController != GetComponent<TeamPointer>().TeamController)
+        if (collision.collider.GetComponent<Rigidbody>() != null && (collision.collider.gameObject.CompareTag("Edible") && collision.collider.GetComponent<TeamPointer>().TeamController != GetComponent<TeamPointer>().TeamController)
             || collision.collider.gameObject.CompareTag("Food"))
         {
             Rigidbody otherRB = collision.collider.GetComponent<Rigidbody>();
@@ -42,7 +42,7 @@ public class EatController : MonoBehaviour {
             if (rb.mass > otherRB.mass)
             {
                 rb.mass += otherRB.mass;
-                Destroy(collision.collider.gameObject);
+                collision.collider.GetComponent<EatenController>().Eaten(gameObject);
             }
         }
     }

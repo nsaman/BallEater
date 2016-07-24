@@ -93,7 +93,7 @@ public class AILookWait : MonoBehaviour
         foreach (GameObject edible in edibles)
         {
             // check if it is small enough to eat
-            if (rb.mass > edible.GetComponent<Rigidbody>().mass)
+            if (edible.GetComponent<Rigidbody>() != null && rb.mass > edible.GetComponent<Rigidbody>().mass)
             {
                 // check if it is the closest edible thing
                 float currentFoodDistance = Vector3.Distance(edible.transform.position, transform.position);
@@ -121,7 +121,7 @@ public class AILookWait : MonoBehaviour
         {
 
             // check if it is small enough to eat
-            if (rb.mass > food.GetComponent<Rigidbody>().mass)
+            if (food.GetComponent<Rigidbody>() != null && rb.mass > food.GetComponent<Rigidbody>().mass)
             {
                 // check if it is the closest edible thing
                 float currentFoodDistance = Vector3.Distance(food.transform.position, transform.position);

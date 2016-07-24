@@ -31,7 +31,7 @@ public class FPSDisplay : MonoBehaviour
         int teamateCount = 0;
         foreach(GameObject ball in balls)
         {
-            if (ball != player)
+            if (ball != player && ball.GetComponent<Rigidbody>() != null)
             {
                 if (player == null || ball.GetComponent<TeamPointer>().TeamController != player.GetComponent<TeamPointer>().TeamController)
                 {
@@ -48,9 +48,13 @@ public class FPSDisplay : MonoBehaviour
         string text = "";
         if (player != null)
         {
-            if (player.GetComponent<Rigidbody>().mass > playersTopMass)
-                playersTopMass = player.GetComponent<Rigidbody>().mass;
-            text = string.Format("{0:0.0} ms ({1:0.} fps)\nFood: " + GameObject.FindGameObjectsWithTag("Food").Length + "\nTeamates: " + teamateCount + "\nEnimies: " + enemyCount + "\nYour Mass: " + player.GetComponent<Rigidbody>().mass + "\nTop enemy mass: " + biggestBall, msec, fps);
+            if (player.GetComponent<Rigidbody>() != null)
+            {
+                if (player.GetComponent<Rigidbody>().mass > playersTopMass)
+                    playersTopMass = player.GetComponent<Rigidbody>().mass;
+                text = string.Format("{0:0.0} ms ({1:0.} fps)\nFood: " + GameObject.FindGameObjectsWithTag("Food").Length + "\nTeamates: " + teamateCount + "\nEnimies: " + enemyCount + "\nYour Mass: " + player.GetComponent<Rigidbody>().mass + "\nTop enemy mass: " + biggestBall, msec, fps);
+            } else
+                text = string.Format("{0:0.0} ms ({1:0.} fps)\nFood: " + GameObject.FindGameObjectsWithTag("Food").Length + "\nTeamates: " + teamateCount + "\nEnimies: " + enemyCount + "\nYour Mass: 0\nTop enemy mass: " + biggestBall, msec, fps);
         } else
         {
             text = string.Format("{0:0.0} ms ({1:0.} fps)\nFood: " + GameObject.FindGameObjectsWithTag("Food").Length + "\nTeamates: " + teamateCount + "\nEnimies: " + enemyCount + "\nYour Top Mass: " + playersTopMass + "\nTop enemy mass: " + biggestBall, msec, fps);
