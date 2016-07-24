@@ -2,7 +2,6 @@ implement:
 Blast radius on hitting ground/other stuff
 AI falling off edge
 invisible bottom
-fix team counter
 Better/cheaper AI
 make all configs floats
 make speed a config

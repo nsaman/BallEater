@@ -5,6 +5,7 @@ public class FPSDisplay : MonoBehaviour
 {
     float deltaTime = 0.0f;
     public GameObject player;
+    float playersTopMass = 0;
 
     void Update()
     {
@@ -26,21 +27,33 @@ public class FPSDisplay : MonoBehaviour
         GameObject[] balls = GameObject.FindGameObjectsWithTag("Edible");
         // find the biggest enemy ball
         float biggestBall = 0;
+        int enemyCount = 0;
+        int teamateCount = 0;
         foreach(GameObject ball in balls)
         {
             if (ball != player)
             {
-                if (ball.GetComponent<Rigidbody>().mass > biggestBall)
-                    biggestBall = ball.GetComponent<Rigidbody>().mass;
+                if (player == null || ball.GetComponent<TeamPointer>().TeamController != player.GetComponent<TeamPointer>().TeamController)
+                {
+                    if (ball.GetComponent<Rigidbody>().mass > biggestBall)
+                        biggestBall = ball.GetComponent<Rigidbody>().mass;
+                    enemyCount++;
+                } else
+                {
+                    teamateCount++;
+                }
+
             }
         }
         string text = "";
         if (player != null)
         {
-            text = string.Format("{0:0.0} ms ({1:0.} fps)\nFood: " + GameObject.FindGameObjectsWithTag("Food").Length + "\n" + "Enimies: " + (balls.Length - 1) + "\nYour Mass: " + player.GetComponent<Rigidbody>().mass + "\nTop enemy mass: " + biggestBall, msec, fps);
+            if (player.GetComponent<Rigidbody>().mass > playersTopMass)
+                playersTopMass = player.GetComponent<Rigidbody>().mass;
+            text = string.Format("{0:0.0} ms ({1:0.} fps)\nFood: " + GameObject.FindGameObjectsWithTag("Food").Length + "\nTeamates: " + teamateCount + "\nEnimies: " + enemyCount + "\nYour Mass: " + player.GetComponent<Rigidbody>().mass + "\nTop enemy mass: " + biggestBall, msec, fps);
         } else
         {
-            text = string.Format("{0:0.0} ms ({1:0.} fps)\nFood: " + GameObject.FindGameObjectsWithTag("Food").Length + "\n" + "Enimies: " + (balls.Length - 1) + "\nYour Mass: 0\nTop enemy mass: " + biggestBall, msec, fps);
+            text = string.Format("{0:0.0} ms ({1:0.} fps)\nFood: " + GameObject.FindGameObjectsWithTag("Food").Length + "\nTeamates: " + teamateCount + "\nEnimies: " + enemyCount + "\nYour Top Mass: " + playersTopMass + "\nTop enemy mass: " + biggestBall, msec, fps);
         }
         GUI.Label(rect, text, style);
     }
