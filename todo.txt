@@ -4,8 +4,10 @@ AI falling off edge
 invisible bottom
 uncouple fps and jumping
 prettier eating
-Shrinking map game mode
 Endless Scrolling
+tweak speed mult
+Change globals to camel case
+Player spawn size config
 Better/cheaper AI
 Special movements and attacks
 Better configs/reading

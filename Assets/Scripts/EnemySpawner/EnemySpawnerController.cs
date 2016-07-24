@@ -2,7 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class EnemySpawnerController : MonoBehaviour {
+public class EnemySpawnerController : MonoBehaviour
+{
 
     public GameObject NPC;
     private Globals globals;
@@ -24,10 +25,10 @@ public class EnemySpawnerController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-       if (enemiesSpawned < globals.MAXENEMIES)
+        if (enemiesSpawned < globals.MAXENEMIES)
         {
             // spawn a npc in the playing area
-            GameObject npc = (GameObject)Instantiate(NPC, new Vector3((Random.value * globals.GROUNDXSIZE - globals.GROUNDXSIZE / 2), Random.value * 20 + 25, (Random.value * globals.GROUNDZSIZE - globals.GROUNDZSIZE / 2) ), Quaternion.identity);
+            GameObject npc = (GameObject)Instantiate(NPC, new Vector3((Random.value * globals.GROUNDXSIZE - globals.GROUNDXSIZE / 2), Random.value * 20 + 25, (Random.value * globals.GROUNDZSIZE - globals.GROUNDZSIZE / 2)), Quaternion.identity);
             enemiesSpawned++;
 
             // if we haven't reachead max teams (player needs to be accounted for)
@@ -38,7 +39,6 @@ public class EnemySpawnerController : MonoBehaviour {
             }
             else
                 npc.GetComponent<TeamPointer>().TeamController = teams[enemiesSpawned % globals.MAXTEAMS];
-
         }
     }
 }

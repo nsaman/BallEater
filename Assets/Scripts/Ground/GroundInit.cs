@@ -12,4 +12,10 @@ public class GroundInit : MonoBehaviour {
         trans = GetComponent<Transform>();
         trans.localScale = new Vector3(globals.GROUNDXSIZE,1, globals.GROUNDZSIZE);
     }
+
+    void Update()
+    {
+        trans = GetComponent<Transform>();
+        trans.localScale = new Vector3(globals.GROUNDXSIZE, 1, globals.GROUNDZSIZE);
+    }
 }

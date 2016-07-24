@@ -16,11 +16,14 @@ public class Globals {
     public bool AICANSPLIT = true;
     public float SPLITSPEED = 700f;
     public float MINSPLITMASS = .9f;
-    public float MINTIMESPLIT = .5f;
+    public float MINTIMESPLIT = .6f;
     public bool AISPLITONCEPERTARGET = false;
     public bool CANSWITCHWITHTEAM = true;
-    public float AIMINLOOKWAIT = .6f;
+    public float AIMINLOOKWAIT = .5f;
     public float SPEEDMULTIPLIER = 100;
+    public bool ISSHRINKING = false;
+    public float SHRINKTIMETILLMIN = 120;
+    public float SHRINKMINSIZE = 10;
 
     private static Globals instance;
 
@@ -62,7 +65,10 @@ public class Globals {
                            "\t\"AISPLITONCEPERTARGET\": " + AISPLITONCEPERTARGET + ",\n" +
                            "\t\"CANSWITCHWITHTEAM\": " + CANSWITCHWITHTEAM + ",\n" +
                            "\t\"AIMINLOOKWAIT\": " + AIMINLOOKWAIT + ",\n" +
-                           "\t\"SPEEDMULTIPLIER\": " + SPEEDMULTIPLIER + "\n" +
+                           "\t\"SPEEDMULTIPLIER\": " + SPEEDMULTIPLIER + ",\n" +
+                           "\t\"ISSHRINKING\": " + ISSHRINKING + ",\n" +
+                           "\t\"SHRINKTIMETILLMIN\": " + SHRINKTIMETILLMIN + ",\n" +
+                           "\t\"SHRINKMINSIZE\": " + SHRINKMINSIZE + "\n" +
                            "}";
             System.IO.File.WriteAllText("conf.json", text);
         }
@@ -93,6 +99,9 @@ public class Globals {
         string stringCANSWITCHWITHTEAM = json.Substring(json.IndexOf("CANSWITCHWITHTEAM") + 20);
         string stringAIMINLOOKWAIT = json.Substring(json.IndexOf("AIMINLOOKWAIT") + 16);
         string stringSPEEDMULTIPLIER = json.Substring(json.IndexOf("SPEEDMULTIPLIER") + 18);
+        string stringISSHRINKING = json.Substring(json.IndexOf("ISSHRINKING") + 14);
+        string stringSHRINKTIMETILLMIN = json.Substring(json.IndexOf("SHRINKTIMETILLMIN") + 20);
+        string stringSHRINKMINSIZE = json.Substring(json.IndexOf("SHRINKMINSIZE") + 16);
 
 
         GROUNDXSIZE = float.Parse(stringGROUNDXSIZE.Substring(0, stringGROUNDXSIZE.IndexOf(",")));
@@ -110,7 +119,10 @@ public class Globals {
         AISPLITONCEPERTARGET = bool.Parse(stringAISPLITONCEPERTARGET.Substring(0, stringAISPLITONCEPERTARGET.IndexOf(",")));
         CANSWITCHWITHTEAM = bool.Parse(stringCANSWITCHWITHTEAM.Substring(0, stringCANSWITCHWITHTEAM.IndexOf(",")));
         AIMINLOOKWAIT = float.Parse(stringAIMINLOOKWAIT.Substring(0, stringAIMINLOOKWAIT.IndexOf(",")));
-        SPEEDMULTIPLIER = float.Parse(stringSPEEDMULTIPLIER.Substring(0, stringSPEEDMULTIPLIER.IndexOf("\n")));
+        SPEEDMULTIPLIER = float.Parse(stringSPEEDMULTIPLIER.Substring(0, stringSPEEDMULTIPLIER.IndexOf(",")));
+        ISSHRINKING = bool.Parse(stringISSHRINKING.Substring(0, stringISSHRINKING.IndexOf(",")));
+        SHRINKTIMETILLMIN = float.Parse(stringSHRINKTIMETILLMIN.Substring(0, stringSHRINKTIMETILLMIN.IndexOf(",")));
+        SHRINKMINSIZE = float.Parse(stringSHRINKMINSIZE.Substring(0, stringSHRINKMINSIZE.IndexOf("\n")));
     }
 
 
@@ -121,7 +133,7 @@ public class Globals {
     }
 	
 	// Update is called once per frame
-	/*void Update () {
+	void Update () {
 	
 	}*/
 }
