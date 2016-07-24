@@ -26,6 +26,7 @@ public class Globals {
     public float SHRINKXENDSIZE = 20;
     public float SHRINKZENDSIZE = 20;
     public float NEARCLIPPLANE = .3f;
+    public float FARCLIPPLANE = 1000;
 
     private static Globals instance;
 
@@ -72,7 +73,8 @@ public class Globals {
                            "\t\"SHRINKTIMETILLEND\": " + SHRINKTIMETILLEND + ",\n" +
                            "\t\"SHRINKXENDSIZE\": " + SHRINKXENDSIZE + ",\n" +
                            "\t\"SHRINKZENDSIZE\": " + SHRINKZENDSIZE + ",\n" +
-                           "\t\"NEARCLIPPLANE\": " + NEARCLIPPLANE + "\n" +
+                           "\t\"NEARCLIPPLANE\": " + NEARCLIPPLANE + ",\n" +
+                           "\t\"FARCLIPPLANE\": " + FARCLIPPLANE + "\n" +
                            "}";
             System.IO.File.WriteAllText("conf.json", text);
         }
@@ -108,6 +110,7 @@ public class Globals {
         string stringSHRINKXENDSIZE = json.Substring(json.IndexOf("SHRINKXENDSIZE") + 17);
         string stringSHRINKZENDSIZE = json.Substring(json.IndexOf("SHRINKZENDSIZE") + 17);
         string stringNEARCLIPPLANE = json.Substring(json.IndexOf("NEARCLIPPLANE") + 16);
+        string stringFARCLIPPLANE = json.Substring(json.IndexOf("FARCLIPPLANE") + 15);
 
 
         GROUNDXSIZE = float.Parse(stringGROUNDXSIZE.Substring(0, stringGROUNDXSIZE.IndexOf(",")));
@@ -130,7 +133,8 @@ public class Globals {
         SHRINKTIMETILLEND = float.Parse(stringSHRINKTIMETILLEND.Substring(0, stringSHRINKTIMETILLEND.IndexOf(",")));
         SHRINKXENDSIZE = float.Parse(stringSHRINKXENDSIZE.Substring(0, stringSHRINKXENDSIZE.IndexOf(",")));
         SHRINKZENDSIZE = float.Parse(stringSHRINKZENDSIZE.Substring(0, stringSHRINKZENDSIZE.IndexOf(",")));
-        NEARCLIPPLANE = float.Parse(stringNEARCLIPPLANE.Substring(0, stringNEARCLIPPLANE.IndexOf("\n")));
+        NEARCLIPPLANE = float.Parse(stringNEARCLIPPLANE.Substring(0, stringNEARCLIPPLANE.IndexOf(",")));
+        FARCLIPPLANE = float.Parse(stringFARCLIPPLANE.Substring(0, stringFARCLIPPLANE.IndexOf("\n")));
     }
 
 
