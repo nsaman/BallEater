@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class ShrinkController : MonoBehaviour {
 
     private Globals globals;
     private float startingXSize;
     private float startingZSize;
+    private DateTime dt;
 
     // Use this for initialization
     void Start ()
@@ -13,21 +15,21 @@ public class ShrinkController : MonoBehaviour {
         globals = Globals.Instance;
         startingXSize = globals.GROUNDXSIZE;
         startingZSize = globals.GROUNDZSIZE;
+        dt = DateTime.UtcNow;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (globals.ISSHRINKING && globals.GROUNDXSIZE > globals.SHRINKMINSIZE)
+        if (globals.ISSHRINKING)
         {
-            globals.GROUNDXSIZE -= startingXSize / globals.SHRINKTIMETILLMIN * Time.deltaTime;
-            if (globals.GROUNDXSIZE < globals.SHRINKMINSIZE)
-                globals.GROUNDXSIZE = globals.SHRINKMINSIZE;
-        }
-        if (globals.ISSHRINKING && globals.GROUNDZSIZE > globals.SHRINKMINSIZE)
-        {
-            globals.GROUNDZSIZE -= startingZSize / globals.SHRINKTIMETILLMIN * Time.deltaTime;
-            if (globals.GROUNDZSIZE < globals.SHRINKMINSIZE)
-                globals.GROUNDZSIZE = globals.SHRINKMINSIZE;
+            if ((DateTime.UtcNow - dt).Seconds < globals.SHRINKTIMETILLEND)
+                globals.GROUNDXSIZE -= (startingXSize - globals.SHRINKXENDSIZE) / globals.SHRINKTIMETILLEND * Time.deltaTime;
+            else
+                globals.GROUNDXSIZE = globals.SHRINKXENDSIZE;
+            if ((DateTime.UtcNow - dt).Seconds < globals.SHRINKTIMETILLEND)
+                globals.GROUNDZSIZE -= (startingZSize - globals.SHRINKZENDSIZE) / globals.SHRINKTIMETILLEND * Time.deltaTime;
+            else
+                globals.GROUNDZSIZE = globals.SHRINKZENDSIZE;
         }
     }
 }

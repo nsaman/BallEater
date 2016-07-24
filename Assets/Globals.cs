@@ -11,7 +11,7 @@ public class Globals {
     public int MAXENEMIES = 250;
     public int MAXTEAMS = 20;
     public bool HASEDGEWALLS = false;
-    public float WALLHEIGHT = 1;
+    public float WALLHEIGHT = 3;
     public bool CANSPLIT = true;
     public bool AICANSPLIT = true;
     public float SPLITSPEED = 700f;
@@ -22,8 +22,9 @@ public class Globals {
     public float AIMINLOOKWAIT = .5f;
     public float SPEEDMULTIPLIER = 100;
     public bool ISSHRINKING = false;
-    public float SHRINKTIMETILLMIN = 120;
-    public float SHRINKMINSIZE = 10;
+    public float SHRINKTIMETILLEND = 120;
+    public float SHRINKXENDSIZE = 20;
+    public float SHRINKZENDSIZE = 20;
 
     private static Globals instance;
 
@@ -67,8 +68,9 @@ public class Globals {
                            "\t\"AIMINLOOKWAIT\": " + AIMINLOOKWAIT + ",\n" +
                            "\t\"SPEEDMULTIPLIER\": " + SPEEDMULTIPLIER + ",\n" +
                            "\t\"ISSHRINKING\": " + ISSHRINKING + ",\n" +
-                           "\t\"SHRINKTIMETILLMIN\": " + SHRINKTIMETILLMIN + ",\n" +
-                           "\t\"SHRINKMINSIZE\": " + SHRINKMINSIZE + "\n" +
+                           "\t\"SHRINKTIMETILLEND\": " + SHRINKTIMETILLEND + ",\n" +
+                           "\t\"SHRINKXENDSIZE\": " + SHRINKXENDSIZE + ",\n" +
+                           "\t\"SHRINKZENDSIZE\": " + SHRINKZENDSIZE + "\n" +
                            "}";
             System.IO.File.WriteAllText("conf.json", text);
         }
@@ -100,8 +102,9 @@ public class Globals {
         string stringAIMINLOOKWAIT = json.Substring(json.IndexOf("AIMINLOOKWAIT") + 16);
         string stringSPEEDMULTIPLIER = json.Substring(json.IndexOf("SPEEDMULTIPLIER") + 18);
         string stringISSHRINKING = json.Substring(json.IndexOf("ISSHRINKING") + 14);
-        string stringSHRINKTIMETILLMIN = json.Substring(json.IndexOf("SHRINKTIMETILLMIN") + 20);
-        string stringSHRINKMINSIZE = json.Substring(json.IndexOf("SHRINKMINSIZE") + 16);
+        string stringSHRINKTIMETILLEND = json.Substring(json.IndexOf("SHRINKTIMETILLEND") + 20);
+        string stringSHRINKXENDSIZE = json.Substring(json.IndexOf("SHRINKXENDSIZE") + 17);
+        string stringSHRINKZENDSIZE = json.Substring(json.IndexOf("SHRINKZENDSIZE") + 17);
 
 
         GROUNDXSIZE = float.Parse(stringGROUNDXSIZE.Substring(0, stringGROUNDXSIZE.IndexOf(",")));
@@ -121,8 +124,9 @@ public class Globals {
         AIMINLOOKWAIT = float.Parse(stringAIMINLOOKWAIT.Substring(0, stringAIMINLOOKWAIT.IndexOf(",")));
         SPEEDMULTIPLIER = float.Parse(stringSPEEDMULTIPLIER.Substring(0, stringSPEEDMULTIPLIER.IndexOf(",")));
         ISSHRINKING = bool.Parse(stringISSHRINKING.Substring(0, stringISSHRINKING.IndexOf(",")));
-        SHRINKTIMETILLMIN = float.Parse(stringSHRINKTIMETILLMIN.Substring(0, stringSHRINKTIMETILLMIN.IndexOf(",")));
-        SHRINKMINSIZE = float.Parse(stringSHRINKMINSIZE.Substring(0, stringSHRINKMINSIZE.IndexOf("\n")));
+        SHRINKTIMETILLEND = float.Parse(stringSHRINKTIMETILLEND.Substring(0, stringSHRINKTIMETILLEND.IndexOf(",")));
+        SHRINKXENDSIZE = float.Parse(stringSHRINKXENDSIZE.Substring(0, stringSHRINKXENDSIZE.IndexOf(",")));
+        SHRINKZENDSIZE = float.Parse(stringSHRINKZENDSIZE.Substring(0, stringSHRINKZENDSIZE.IndexOf("\n")));
     }
 
 
