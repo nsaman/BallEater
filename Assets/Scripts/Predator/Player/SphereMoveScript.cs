@@ -5,7 +5,6 @@ public class SphereMoveScript : MonoBehaviour
 {
 
     private Rigidbody rb;
-    private static float speed = 100;
     private Transform cam;
     private bool canJump;
     private Globals globals;
@@ -41,7 +40,7 @@ public class SphereMoveScript : MonoBehaviour
             canJump = false;
         }
 
-        rb.AddForce(movement * speed * Time.deltaTime * (rb.mass + 1) / 1.08f);
+        rb.AddForce(movement * globals.SPEEDMULTIPLIER * Time.deltaTime * (rb.mass + 1) / 1.08f);
 
         timeSinceLastSplit += Time.deltaTime;
         if (globals.CANSPLIT && Input.GetKeyDown(KeyCode.LeftShift) && timeSinceLastSplit >= globals.MINTIMESPLIT)

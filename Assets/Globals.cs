@@ -5,13 +5,13 @@
 public class Globals {
 
     // default settings
-    public int GROUNDXSIZE = 100;
-    public int GROUNDZSIZE = 100;
+    public float GROUNDXSIZE = 100;
+    public float GROUNDZSIZE = 100;
     public int MAXFOOD = 1500;
     public int MAXENEMIES = 250;
     public int MAXTEAMS = 20;
     public bool HASEDGEWALLS = false;
-    public int WALLHEIGHT = 1;
+    public float WALLHEIGHT = 1;
     public bool CANSPLIT = true;
     public bool AICANSPLIT = true;
     public float SPLITSPEED = 700f;
@@ -19,7 +19,8 @@ public class Globals {
     public float MINTIMESPLIT = .5f;
     public bool AISPLITONCEPERTARGET = false;
     public bool CANSWITCHWITHTEAM = true;
-    public float AIMINLOOKWAIT = .5f;
+    public float AIMINLOOKWAIT = .6f;
+    public float SPEEDMULTIPLIER = 100;
 
     private static Globals instance;
 
@@ -60,7 +61,8 @@ public class Globals {
                            "\t\"MINTIMESPLIT\": " + MINTIMESPLIT + ",\n" +
                            "\t\"AISPLITONCEPERTARGET\": " + AISPLITONCEPERTARGET + ",\n" +
                            "\t\"CANSWITCHWITHTEAM\": " + CANSWITCHWITHTEAM + ",\n" +
-                           "\t\"AIMINLOOKWAIT\": " + AIMINLOOKWAIT + "\n" +
+                           "\t\"AIMINLOOKWAIT\": " + AIMINLOOKWAIT + ",\n" +
+                           "\t\"SPEEDMULTIPLIER\": " + SPEEDMULTIPLIER + "\n" +
                            "}";
             System.IO.File.WriteAllText("conf.json", text);
         }
@@ -90,15 +92,16 @@ public class Globals {
         string stringAISPLITONCEPERTARGET = json.Substring(json.IndexOf("AISPLITONCEPERTARGET") + 23);
         string stringCANSWITCHWITHTEAM = json.Substring(json.IndexOf("CANSWITCHWITHTEAM") + 20);
         string stringAIMINLOOKWAIT = json.Substring(json.IndexOf("AIMINLOOKWAIT") + 16);
+        string stringSPEEDMULTIPLIER = json.Substring(json.IndexOf("SPEEDMULTIPLIER") + 18);
 
 
-        GROUNDXSIZE = int.Parse(stringGROUNDXSIZE.Substring(0, stringGROUNDXSIZE.IndexOf(",")));
-        GROUNDZSIZE = int.Parse(stringGROUNDZSIZE.Substring(0, stringGROUNDZSIZE.IndexOf(",")));
+        GROUNDXSIZE = float.Parse(stringGROUNDXSIZE.Substring(0, stringGROUNDXSIZE.IndexOf(",")));
+        GROUNDZSIZE = float.Parse(stringGROUNDZSIZE.Substring(0, stringGROUNDZSIZE.IndexOf(",")));
         MAXFOOD = int.Parse(stringMAXFOOD.Substring(0, stringMAXFOOD.IndexOf(",")));
         MAXENEMIES = int.Parse(stringMAXENEMIES.Substring(0, stringMAXENEMIES.IndexOf(",")));
         MAXTEAMS = int.Parse(stringMAXTEAMS.Substring(0, stringMAXTEAMS.IndexOf(",")));
         HASEDGEWALLS = bool.Parse(stringHASEDGEWALLS.Substring(0, stringHASEDGEWALLS.IndexOf(",")));
-        WALLHEIGHT = int.Parse(stringWALLHEIGHT.Substring(0, stringWALLHEIGHT.IndexOf(",")));
+        WALLHEIGHT = float.Parse(stringWALLHEIGHT.Substring(0, stringWALLHEIGHT.IndexOf(",")));
         CANSPLIT = bool.Parse(stringCANSPLIT.Substring(0, stringCANSPLIT.IndexOf(",")));
         AICANSPLIT = bool.Parse(stringAICANSPLIT.Substring(0, stringAICANSPLIT.IndexOf(",")));
         SPLITSPEED = float.Parse(stringSPLITSPEED.Substring(0, stringSPLITSPEED.IndexOf(",")));
@@ -106,7 +109,8 @@ public class Globals {
         MINTIMESPLIT = float.Parse(stringMINTIMESPLIT.Substring(0, stringMINTIMESPLIT.IndexOf(",")));
         AISPLITONCEPERTARGET = bool.Parse(stringAISPLITONCEPERTARGET.Substring(0, stringAISPLITONCEPERTARGET.IndexOf(",")));
         CANSWITCHWITHTEAM = bool.Parse(stringCANSWITCHWITHTEAM.Substring(0, stringCANSWITCHWITHTEAM.IndexOf(",")));
-        AIMINLOOKWAIT = float.Parse(stringAIMINLOOKWAIT.Substring(0, stringAIMINLOOKWAIT.IndexOf("\n")));
+        AIMINLOOKWAIT = float.Parse(stringAIMINLOOKWAIT.Substring(0, stringAIMINLOOKWAIT.IndexOf(",")));
+        SPEEDMULTIPLIER = float.Parse(stringSPEEDMULTIPLIER.Substring(0, stringSPEEDMULTIPLIER.IndexOf("\n")));
     }
 
 

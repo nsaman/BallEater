@@ -6,7 +6,6 @@ public class AILookWait : MonoBehaviour
 {
 
     private Rigidbody rb;
-    private static float speed = 100;
     private bool canJump;
     private GameObject currentTarget;
     private GameObject splitTarget;
@@ -49,7 +48,7 @@ public class AILookWait : MonoBehaviour
 
             //todo add jump logic
 
-            rb.AddForce(toFoodDirection * speed * Time.deltaTime * (rb.mass + 1) / 1.08f);
+            rb.AddForce(toFoodDirection * globals.SPEEDMULTIPLIER * Time.deltaTime * (rb.mass + 1) / 1.08f);
         }
         timeSinceLastSplit += Time.deltaTime;
         if (globals.AICANSPLIT && newSplitTarget && splitTarget != null && timeSinceLastSplit >= globals.MINTIMESPLIT)
