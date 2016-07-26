@@ -22,11 +22,11 @@ public class ShrinkController : MonoBehaviour {
 	void Update () {
         if (globals.ISSHRINKING)
         {
-            if ((DateTime.UtcNow - dt).Seconds < globals.SHRINKTIMETILLEND)
+            if ((DateTime.UtcNow - dt).TotalSeconds < globals.SHRINKTIMETILLEND)
                 globals.GROUNDXSIZE -= (startingXSize - globals.SHRINKXENDSIZE) / globals.SHRINKTIMETILLEND * Time.deltaTime;
             else
                 globals.GROUNDXSIZE = globals.SHRINKXENDSIZE;
-            if ((DateTime.UtcNow - dt).Seconds < globals.SHRINKTIMETILLEND)
+            if ((DateTime.UtcNow - dt).TotalSeconds < globals.SHRINKTIMETILLEND)
                 globals.GROUNDZSIZE -= (startingZSize - globals.SHRINKZENDSIZE) / globals.SHRINKTIMETILLEND * Time.deltaTime;
             else
                 globals.GROUNDZSIZE = globals.SHRINKZENDSIZE;
