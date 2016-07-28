@@ -26,6 +26,8 @@ public class EatenController : MonoBehaviour {
                 Destroy(GetComponent<Rigidbody>());
             if (GetComponent<BoxCollider>() != null)
                 Destroy(GetComponent<BoxCollider>());
+            if (GetComponent<SphereCollider>() != null)
+                Destroy(GetComponent<SphereCollider>());
             if (GetComponent<OutOfBoundsDestroy>() != null)
                 Destroy(GetComponent<OutOfBoundsDestroy>());
             if (GetComponent<EatController>() != null)
