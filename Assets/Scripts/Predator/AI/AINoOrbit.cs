@@ -55,28 +55,26 @@ public class AINoOrbit : MonoBehaviour {
             Vector3 velocityRBNoY;
             if (rb.velocity.magnitude > 1)
             {
-                velocityRBNoY = rb.velocity.normalized;
+                velocityRBNoY = rb.velocity;
                 velocityRBNoY.y = 0;
             }
             else
             {
                 velocityRBNoY = new Vector3(0, 0, 0);
             }
-
-
+            
             Vector3 correctedDirection = (toFoodDirection - velocityRBNoY.normalized * .9f).normalized;
-
-
+            
             if (correctedDirection.magnitude > .9f)
-                rb.AddForce(correctedDirection * globals.SPEEDMULTIPLIER * Time.deltaTime * (rb.mass + 1) / 1.08f);
+                rb.AddForce(correctedDirection * globals.SPEEDMULTIPLIER * Time.deltaTime * (rb.mass + 1));
             else
-                rb.AddForce(toFoodDirection * globals.SPEEDMULTIPLIER * Time.deltaTime * (rb.mass + 1) / 1.08f);
+                rb.AddForce(toFoodDirection * globals.SPEEDMULTIPLIER * Time.deltaTime * (rb.mass + 1));
         }
 
         timeSinceLastSplit += Time.deltaTime;
-        
+
     }
-    
+
     void OnCollisionEnter(Collision collision)
     {
         canJump = true;
@@ -88,6 +86,9 @@ public class AINoOrbit : MonoBehaviour {
         float closestEdibleFoodDistance = 99999999;
         GameObject closestSplitTarget = null;
         float closestSplitTargetDistance = 99999999;
+        Transform thisTransform = GetComponent<Transform>();
+        Vector3 posWithVelocity = rb.velocity * .75f + thisTransform.position;
+        float maxShootRange = thisTransform.localScale.x * 3;
 
         // get list of available foods
         List<GameObject> foods = new List<GameObject>(GameObject.FindGameObjectsWithTag("Food"));
@@ -108,39 +109,44 @@ public class AINoOrbit : MonoBehaviour {
         // first look through enemies looking for potential food targets and split targets
         foreach (GameObject edible in edibles)
         {
+            Rigidbody edibleRB = edible.GetComponent<Rigidbody>();
+
             // check if it is small enough to eat and also that it isn't too high to eat
-            if (edible.GetComponent<Rigidbody>() != null && rb.mass > edible.GetComponent<Rigidbody>().mass && edible.transform.position.y < transform.localScale.y)
+            if (edibleRB != null && rb.mass > edibleRB.mass)
             {
                 // check if it is the closest edible thing
-                float currentFoodDistance = Vector3.Distance(edible.transform.position, transform.position);
+                float currentFoodDistance = Vector3.Distance(edible.transform.position, thisTransform.position);
                 if (currentFoodDistance < closestEdibleFoodDistance)
                 {
                     closestEdibleFood = edible;
                     closestEdibleFoodDistance = currentFoodDistance;
-                }
-                if (globals.CANSPLIT &&
-                    currentFoodDistance < closestSplitTargetDistance &&
-                    rb.mass > edible.GetComponent<Rigidbody>().mass * 2 &&
-                    // this should probably be used to check target distance - distance to target after .75 sec
-                    // if after .75 seconds we are within 3 diameters, shoot!
-                    GetComponent<Transform>().localScale.x * 3 > (rb.velocity * .75f + GetComponent<Transform>().position - edible.transform.position).magnitude) // - edible.transform.position * 1000f * rb.mass))
-                {
-                    closestSplitTarget = edible;
-                    closestSplitTargetDistance = currentFoodDistance;
+
+                    if (globals.CANSPLIT &&
+                        currentFoodDistance < closestSplitTargetDistance &&
+                        rb.mass > edibleRB.mass * 2 &&
+                        // this should probably be used to check target distance - distance to target after .75 sec
+                        // if after .75 seconds we are within 3 diameters, shoot!
+                        maxShootRange > (posWithVelocity - edible.transform.position).magnitude)
+                    {
+                        closestSplitTarget = edible;
+                        closestSplitTargetDistance = currentFoodDistance;
+                    }
                 }
             }
         }
 
+        float thisHeight = thisTransform.localScale.y + thisTransform.position.y;
 
         // then look through food
         foreach (GameObject food in foods)
         {
+            Rigidbody foodRB = food.GetComponent<Rigidbody>();
 
             // check if it is small enough to eat
-            if (food.GetComponent<Rigidbody>() != null && rb.mass > food.GetComponent<Rigidbody>().mass)
+            if (foodRB != null && rb.mass > foodRB.mass && food.transform.position.y < thisHeight)
             {
                 // check if it is the closest edible thing
-                float currentFoodDistance = Vector3.Distance(food.transform.position, transform.position);
+                float currentFoodDistance = Vector3.Distance(food.transform.position, thisTransform.position);
                 if (currentFoodDistance < closestEdibleFoodDistance)
                 {
                     closestEdibleFood = food;
@@ -152,9 +158,9 @@ public class AINoOrbit : MonoBehaviour {
         this.currentTarget = closestEdibleFood;
 
         if (closestSplitTarget != this.splitTarget)
+        {
             newSplitTarget = true;
-        this.splitTarget = closestSplitTarget;
-
-
+            this.splitTarget = closestSplitTarget;
+        }
     }
 }
