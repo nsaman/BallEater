@@ -20,8 +20,8 @@ public class EatenController : MonoBehaviour {
             // remove anything that will mess up the eat animation
             if (GetComponent<SphereMoveScript>() != null)
                 Destroy(GetComponent<SphereMoveScript>());
-            if (GetComponent<AILookWait>() != null)
-                Destroy(GetComponent<AILookWait>());
+            if (GetComponent<AINoOrbit>() != null)
+                Destroy(GetComponent<AINoOrbit>());
             if (GetComponent<Rigidbody>() != null)
                 Destroy(GetComponent<Rigidbody>());
             if (GetComponent<BoxCollider>() != null)
