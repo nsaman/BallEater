@@ -5,7 +5,7 @@ public class EatenController : MonoBehaviour {
 
     private GameObject eatenBy;
     private float originalScale;
-    public bool isEaten = false;
+    private bool isEaten = false;
 
     public void Eaten (GameObject eater)
     {

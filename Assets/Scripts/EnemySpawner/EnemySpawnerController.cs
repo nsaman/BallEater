@@ -17,9 +17,13 @@ public class EnemySpawnerController : MonoBehaviour
         enemiesSpawned = 0;
         teams = new List<TeamController>();
 
-        // add a team for the player
         teams.Add(new TeamController());
-        GameObject.Find("Player").GetComponent<TeamPointer>().TeamController = teams[0];
+
+        // add a team for the player
+        if (GameObject.Find("Player") != null)
+        {
+            GameObject.Find("Player").GetComponent<TeamPointer>().TeamController = teams[0];
+        }
     }
 
     // Update is called once per frame
