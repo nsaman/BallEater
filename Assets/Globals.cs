@@ -48,6 +48,7 @@ public class Globals {
 
     public void LoadJson()
     {
+#if UNITY_STANDALONE
         string json;
 
         if (!System.IO.File.Exists("conf.json"))
@@ -135,6 +136,7 @@ public class Globals {
         SHRINKZENDSIZE = float.Parse(stringSHRINKZENDSIZE.Substring(0, stringSHRINKZENDSIZE.IndexOf(",")));
         NEARCLIPPLANE = float.Parse(stringNEARCLIPPLANE.Substring(0, stringNEARCLIPPLANE.IndexOf(",")));
         FARCLIPPLANE = float.Parse(stringFARCLIPPLANE.Substring(0, stringFARCLIPPLANE.IndexOf("\n")));
+#endif
     }
 
 

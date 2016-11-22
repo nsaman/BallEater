@@ -41,7 +41,7 @@ public class EatenController : MonoBehaviour {
         {
             Transform transform = GetComponent<Transform>();
 
-            if (transform.localScale.x < originalScale / 10)
+            if (eatenBy == null || transform.localScale.x < originalScale / 10)
                 Destroy(gameObject);
             else
             {
